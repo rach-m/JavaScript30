@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>JS Drum Kit</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
@@ -58,7 +58,29 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+let keys = document.querySelectorAll(".key")
+let audios = document.querySelectorAll("audio")
 
+let playAudio = (keyCode, key) => {
+audios.forEach(audio => {
+    if (audio.dataset.key == keyCode){
+      key.classList.add("playing")
+     audio.play()
+      audio.addEventListener('ended', ()=> {
+        key.classList.remove("playing")
+         audio.currentTime = 0;
+      })
+    }
+  })
+}
+    document.addEventListener("keydown", (e)=> {
+      keys.forEach(key => {
+        if(key.dataset.key == event.keyCode){
+          playAudio(event.keyCode, key)
+
+        }
+      })
+  });
 </script>
 
 
