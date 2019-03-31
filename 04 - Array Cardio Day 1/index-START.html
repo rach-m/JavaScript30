@@ -31,28 +31,93 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+        let filter = inventors.filter(inventor => {
+          return 1500 <= inventor.year && inventor.year < 1600
+        })
 
+        console.log(filter)
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
-
+         let names = inventors.map(inventor =>{
+            return inventor.first + " " + inventor.last
+          })
+          console.log(names)
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+          let sorted = inventors.sort(function(a,b){
+            if(a.year > b.year){
+              return 1
+            }
+            else{
+              return -1
+            }
+          })
 
+          console.log(sorted)
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
-
+          let years = inventors.reduce((a, b)=> {
+            const lived = b.passed - b.year
+             return a + lived
+          }, 0)
+          console.log(years)
     // 5. Sort the inventors by years lived
+
+          let yearsLived = inventors.sort((a,b) => {
+            let aLived = a.passed - a.year
+            let bLived = b.passed - b.year
+            if(aLived > bLived){
+              return 1
+            }
+            else{
+              return -1
+            }
+          })
+
+          console.log(yearsLived)
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
+          let category = document.querySelector(".mw-category")
+          let links = category.querySelectorAll("a")
+          let names = []
+          links.forEach(link => {
+            return names.push(link.title)
+          })
+
+          let filtered = names.filter(name => {
+            return name.includes("de")
+          })
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+         let splitNames =  people.map(person => {
+            let split = person.split(",")
+            return split
+          })
 
+          let sortedNames = splitNames.sort((a, b) => {
+            if(a[0]> b[0]) return 1
+            else return -1
+          })
+
+          let finalList = sortedNames.map(name => {
+            return name.join(",")
+          })
+
+
+          console.log(finalList)
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+          let noDupes = data.reduce((a,b) => {
+            if(a.indexOf(b) === -1){
+              a.push(b)
+            }
+            return a
+          }, [])
+          console.log(noDupes)
 
   </script>
 </body>
